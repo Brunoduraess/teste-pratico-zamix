@@ -15,9 +15,9 @@ class checkLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!session()->has('user')) {
+        if (!session()->has('usuario')) {
             session()->flush();
-            return redirect()->to('/login');
+            return redirect()->route('/login');
         }
 
         return $next($request);
