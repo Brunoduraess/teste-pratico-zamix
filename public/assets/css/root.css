@@ -1,0 +1,133 @@
+@font-face {
+    font-family: 'Sao Francisco Regular';
+    src: url('../fonts/saoFranciscoRegular.otf');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sao Francisco Semi Bold';
+    src: url('../fonts/saoFransciscoSemibold.otf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sao Francisco Bold';
+    src: url('../fonts/saoFranciscoBold.otf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* #region ------- Variaveis ------- */
+
+:root {
+    --laranja: #ff5300;
+    --cinza_claro: #c3c3c3;
+    --cinza_medio: #ddd;
+    --cinza_escuro: #58666e;
+    --branco: #fff;
+}
+
+/* #endregion */
+
+body {
+    background-color: #f5f5f5 !important;
+    color: #58666e !important;
+}
+
+/* #region ------------- LOGIN ----------- */
+
+.login {
+    width: 360px;
+    margin: 100px auto;
+    text-align: center;
+    font-family: 'Sao Francisco Regular';
+
+    & .sistema {
+        padding: 5%;
+        border: 1px solid var(--cinza_medio);
+        background-color: var(--branco);
+
+        & .logo {
+            margin-bottom: 18px;
+        }
+
+        & h4 {
+            font-size: 16px;
+            color: var(--cinza_claro);
+        }
+    }
+
+    & form {
+        padding: 10%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        border: 1px solid var(--cinza_medio);
+        border-top: none;
+        background-color: var(--branco);
+
+        & ::-webkit-input-placeholder {
+            color: var(--cinza_claro);
+        }
+
+        & .erro {
+            text-align: left;
+            font-family: 'Sao Francisco Bold';
+            margin: 0;
+            color: #ea2d4a;
+            font-size: 13px;
+        }
+
+        & .btn {
+            width: 100%;
+            background-color: var(--laranja);
+            color: var(--branco);
+            font-family: 'Sao Francisco Semi Bold';
+        }
+
+        & .senha {
+            position: relative;
+            width: 100%;
+        }
+
+        & .senha .show,
+        & .senha .showConfirma,
+        & .senha .hide,
+        & .senha .hideConfirma {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        & .senha #hide,
+        .senha #hideConfirma {
+            display: none;
+        }
+    }
+
+    & .esqueci {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        gap: 1%;
+        margin-top: 2%;
+        color: var(--cinza_escuro);
+        text-decoration: none;
+        font-size: 13px;
+        cursor: pointer;
+
+        & svg {
+            width: 13px;
+            height: 13px;
+        }
+    }
+
+}
+
+/* #endregion */
