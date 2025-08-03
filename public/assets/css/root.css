@@ -131,3 +131,76 @@ body {
 }
 
 /* #endregion */
+
+/* #region ------------- NAVBAR ---------- */
+
+.navbar {
+    background-color: var(--branco);
+    padding: 1% !important;
+    height: auto;
+
+    & .logo {
+        height: 40px;
+    }
+
+    & a {
+        background-color: var(--laranja);
+        width: 100px;
+
+        & svg {
+            width: 20px;
+            height: 20px;
+            color: var(--branco);
+        }
+    }
+}
+
+/* #endregion
+
+/* #region -----------  MENU ----------- */
+
+.menu {
+    width: 70%;
+    margin: 3% 0 0 15%;
+    text-decoration: none;
+
+    & a {
+        text-decoration: none;
+    }
+
+    & .opcao {
+        width: 100%;
+        padding: 2%;
+        border-radius: 10px;
+        border: 1px solid var(--cinza_medio);
+        margin-bottom: 2%;
+        background-color: var(--branco);
+
+        & .titulo {
+            font-size: 25px;
+            font-family: 'Sao Francisco Semi Bold';
+            color: var(--cinza_escuro);
+        }
+
+        & .total {
+            margin-top: 2% 0 0 0;
+            font-family: 'Sao Francisco Semi Bold';
+            color: var(--cinza_escuro);
+        }
+    }
+
+    & .opcao:hover {
+        background-color: var(--laranja);
+        transition: 1s;
+        transform: scale(1.1);
+
+        & .titulo,
+        & .total {
+            color: var(--branco);
+        }
+        
+    }
+
+}
+
+/* #endregion */
