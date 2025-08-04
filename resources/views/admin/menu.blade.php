@@ -8,10 +8,10 @@
     @include('layouts.navbar')
 
     <section class="menu">
-        <a href="">
+        <a href="{{ route('usuarios') }}">
             <div class="opcao">
                 <p class="titulo">Usuários</p>
-                <p class="total">20 usuários cadastrados</p>
+                <p class="total">{{ $totalUsuarios}} usuário(s) cadastrado(s)</p>
             </div>
         </a>
         <a href="">
