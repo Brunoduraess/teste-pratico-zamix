@@ -27,6 +27,7 @@
     --cinza_medio: #ddd;
     --cinza_escuro: #58666e;
     --branco: #fff;
+    --preto: rgb(60, 60, 60);
 }
 
 /* #endregion */
@@ -198,9 +199,177 @@ body {
         & .total {
             color: var(--branco);
         }
-        
+
     }
 
+}
+
+/* #endregion */
+
+/* #region ----------- RESUMO ----------- */
+
+.resumo {
+    width: 70%;
+    margin: 3% 0 0 15%;
+    color: var(--preto);
+    font-family: 'Sao Francisco Semi Bold';
+
+    & .pagina {
+        display: flex;
+        align-items: center;
+
+        & .titulo {
+            margin: 0;
+            font-size: 25px;
+            font-family: 'Sao Francisco Bold';
+        }
+
+        & .rota {
+            margin-left: auto;
+
+            & a {
+                text-decoration: none;
+                color: var(--preto);
+            }
+        }
+    }
+
+    & .ferramentas {
+        display: flex;
+        align-items: center;
+        margin: 3% 0 0 0;
+        gap: 1%;
+
+        & .btn {
+            background-color: var(--laranja);
+            color: var(--branco);
+            width: 20%;
+        }
+    }
+
+    & .tabela {
+        width: 100%;
+        margin: 1% 0 0 0;
+
+        & .table {
+            width: 100%;
+
+            & th {
+                background-color: var(--cinza_medio);
+                text-align: center;
+            }
+
+            & td {
+                color: var(--cinza_escuro);
+                font-family: 'Sao Francisco Regular';
+                text-align: center;
+                vertical-align: middle;
+
+                & .ativo,
+                & .inativo {
+                    margin: 0;
+                    border-radius: 10px;
+                }
+
+                & .ativo {
+                    background-color: #DBFCE7;
+                    color: #559a71;
+                }
+
+                & .inativo {
+                    background-color: #fcdbdb;
+                    color: #9a5655
+                }
+            }
+
+            & .acoes {
+                display: flex;
+                align-items: center;
+                gap: 10%;
+
+                & .acao {
+                    padding: 7%;
+                    background-color: #ffc77e;
+                    border-color: var(--laranja);
+                    border-radius: 10px;
+
+                    & svg {
+                        color: var(--laranja);
+                        width: 22px;
+                        height: 22px;
+                    }
+                }
+
+                & .ativar {
+                    background-color: #DBFCE7;
+
+                    & svg {
+                        color: #559a71;
+                    }
+
+                }
+
+                & .desativar {
+                    background-color: #fcdbdb;
+
+                    & svg {
+                        color: #9a5655;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* #endregion */
+
+/* #region ------------ FORMULÁRIO ----------- */
+
+.formulario {
+    width: 70%;
+    margin: 3% 0 0 15%;
+    color: var(--preto);
+    font-family: 'Sao Francisco Semi Bold';
+
+    & .pagina {
+        display: flex;
+        align-items: center;
+
+        & .titulo {
+            margin: 0;
+            font-size: 25px;
+            font-family: 'Sao Francisco Bold';
+        }
+
+        & .rota {
+            margin-left: auto;
+
+            & a {
+                text-decoration: none;
+                color: var(--preto);
+            }
+        }
+    }
+
+    & form {
+        margin-top: 3%;
+
+        & .form-group {
+            margin-bottom: 1%;
+
+            & .btn {
+                width: 100%;
+            }
+        }
+
+        & .erro {
+            text-align: left;
+            font-family: 'Sao Francisco Bold';
+            margin: 0;
+            color: #ea2d4a;
+            font-size: 13px;
+        }
+    }
 }
 
 /* #endregion */

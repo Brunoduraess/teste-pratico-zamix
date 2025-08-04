@@ -39,7 +39,11 @@ class AuthController extends Controller
         }
 
         if (!password_verify($senha, $usuario->senha)) {
-            return redirect()->back()->withInput()->with('loginErro', 'Email ou senha incorretos');
+            return redirect()->back()->withInput()->with('loginErro', 'Email ou senha incorretos.');
+        }
+
+        if ($senha == '1234') {
+            return redirect()->route('esqueci')->with('alerta', 'Atualize a sua senha.');
         }
 
         $usuario->ultimo_acesso = Carbon::now();
@@ -91,6 +95,10 @@ class AuthController extends Controller
 
         if ($senha != $confirma) {
             return redirect()->back()->withInput()->with('loginErro', 'As senhas não são iguais.');
+        }
+
+        if ($senha != '1234') {
+            return redirect()->back()->withInput()->with('loginErro', 'Não é possível cadastrar essa senha.');
         }
 
         $usuario->senha = bcrypt($senha);
