@@ -89,4 +89,5 @@
             </table>
         </div>
     </section>
+    <script src="{{ asset('assets/js/pesquisar.js') }}"></script>
 @endsection
