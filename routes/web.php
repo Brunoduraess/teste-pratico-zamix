@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\checkLogin;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,7 @@ Route::post('/esqueciSubmit', [AuthController::class, 'esqueciSubmit'])->name('e
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //Middleware para verfificar se o usuário está logado
-Route::middleware(checkLogin::class)->group(function (){
+Route::middleware(checkLogin::class)->group(function () {
     //Rotas do menu
     Route::get('/menu', [AdminController::class, 'menu'])->name('menu');
 
@@ -26,4 +27,12 @@ Route::middleware(checkLogin::class)->group(function (){
     Route::post('/enviaEdicao/{id}', [UserController::class, 'enviaEdicao'])->name('enviaEdicao');
     Route::get('/ativar/{id}', [UserController::class, 'ativar'])->name('ativar');
     Route::get('/desativar/{id}', [UserController::class, 'desativar'])->name('desativar');
+
+    //Rotas para o menu de produtos
+    Route::get('/produtos', [ProductController::class, 'produtos'])->name('produtos');
+    Route::get('/cadastrarProduto', [ProductController::class, 'cadastrarProduto'])->name('cadastrarProduto');
+    Route::post('/enviaCadastroProduto', [ProductController::class, 'enviaCadastroProduto'])->name('enviaCadastroProduto');
+    Route::get('/dadosProduto/{id}', [ProductController::class, 'dadosProduto'])->name('dadosProduto');
+    Route::get('/editarProduto/{id}', [ProductController::class, 'editarProduto'])->name('editarProduto');
+    Route::post('/enviaEdicaoProduto', [ProductController::class, 'enviaEdicaoProduto'])->name('enviaEdicaoProduto');
 });

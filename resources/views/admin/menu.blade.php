@@ -20,10 +20,10 @@
                 <p class="total">2 novas requisições</p>
             </div>
         </a>
-        <a href="">
+        <a href="{{ route('produtos') }}">
             <div class="opcao">
                 <p class="titulo">Catálogo de produtos</p>
-                <p class="total">205 produtos cadastrados</p>
+                <p class="total">{{ $totalProdutos }} produto(s) cadastrado(s)</p>
             </div>
         </a>
                 <a href="">

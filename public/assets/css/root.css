@@ -209,8 +209,8 @@ body {
 /* #region ----------- RESUMO ----------- */
 
 .resumo {
-    width: 70%;
-    margin: 3% 0 0 15%;
+    width: 80%;
+    margin: 3% 0 0 10%;
     color: var(--preto);
     font-family: 'Sao Francisco Semi Bold';
 
@@ -250,9 +250,17 @@ body {
     & .tabela {
         width: 100%;
         margin: 1% 0 0 0;
+        max-height: 600px;
+        overflow-y: auto;
 
         & .table {
             width: 100%;
+
+            & thead th {
+                position: sticky;
+                top: 0;
+                z-index: 1;
+            }
 
             & th {
                 background-color: var(--cinza_medio);
@@ -351,7 +359,7 @@ body {
         }
     }
 
-    & form {
+    & .row {
         margin-top: 3%;
 
         & .form-group {
@@ -362,12 +370,103 @@ body {
             }
         }
 
+        & #composicaoProdutos {
+            margin-bottom: 2%;
+        }
+
         & .erro {
             text-align: left;
             font-family: 'Sao Francisco Bold';
             margin: 0;
             color: #ea2d4a;
             font-size: 13px;
+        }
+
+        & .tabela {
+            width: 100%;
+            margin: 1% 0 0 0;
+            max-height: 300px;
+            overflow-y: auto;
+
+            & .table {
+                width: 100%;
+
+                & thead th {
+                    position: sticky;
+                    top: 0;
+                    z-index: 1;
+                }
+
+                & th {
+                    background-color: var(--cinza_medio);
+                    text-align: center;
+                }
+
+                & td {
+                    color: var(--cinza_escuro);
+                    font-family: 'Sao Francisco Regular';
+                    text-align: center;
+                    vertical-align: middle;
+
+                    & .ativo,
+                    & .inativo {
+                        margin: 0;
+                        border-radius: 10px;
+                    }
+
+                    & .ativo {
+                        background-color: #DBFCE7;
+                        color: #559a71;
+                    }
+
+                    & .inativo {
+                        background-color: #fcdbdb;
+                        color: #9a5655
+                    }
+                }
+
+                & .acoes {
+                    display: flex;
+                    align-items: center;
+                    gap: 10%;
+
+                    & .acao {
+                        padding: 7%;
+                        background-color: #ffc77e;
+                        border-color: var(--laranja);
+                        border-radius: 10px;
+
+                        & svg {
+                            color: var(--laranja);
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+
+                    & .ativar {
+                        background-color: #DBFCE7;
+
+                        & svg {
+                            color: #559a71;
+                        }
+
+                    }
+
+                    & .desativar {
+                        background-color: #fcdbdb;
+
+                        & svg {
+                            color: #9a5655;
+                        }
+                    }
+                }
+            }
+        }
+
+        & .img_produto {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
         }
     }
 }
