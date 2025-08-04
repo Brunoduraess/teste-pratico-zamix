@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+    @if (session('alerta'))
+        <script>
+            alert('{{ session('alerta') }}')
+        </script>
+    @endif
     <section class="login">
         <div class="sistema">
             <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="logo">
