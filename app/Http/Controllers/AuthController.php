@@ -97,14 +97,14 @@ class AuthController extends Controller
             return redirect()->back()->withInput()->with('loginErro', 'As senhas não são iguais.');
         }
 
-        if ($senha != '1234') {
-            return redirect()->back()->withInput()->with('loginErro', 'Não é possível cadastrar essa senha.');
+        if ($senha == '1234') {
+            return redirect()->back()->withInput()->with('alerta', 'Não é possível cadastrar essa senha.');
         }
 
         $usuario->senha = bcrypt($senha);
         $usuario->save();
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('alerta', 'Senha atualizada.');
     }
 
     public function logout()
