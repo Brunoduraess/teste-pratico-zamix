@@ -60,4 +60,7 @@ Route::middleware(checkLogin::class)->group(function () {
     Route::post('/enviaRecusaRequisicao', [RequestController::class, 'enviaRecusaRequisicao'])->name('enviaRecusaRequisicao');
     Route::get('/aprovarRequisicao/{id}', [RequestController::class, 'aprovarRequisicao'])->name('aprovarRequisicao');
     Route::post('/enviaAprovacaoRequisicao', [RequestController::class, 'enviaAprovacaoRequisicao'])->name('enviaAprovacaoRequisicao');
+
+    //Rotas para saidas
+    Route::get('/saidas', [OutputController::class, 'saidas'])->name('saidas');
 });
