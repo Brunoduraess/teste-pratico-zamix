@@ -30,4 +30,9 @@ class Product extends Model
     {
         return $this->hasMany(Input::class, 'id_produto', 'id');
     }
+
+    public function requisicoes(): HasMany
+    {
+        return $this->hasMany(RequestProduct::class, 'id_produto', 'id');
+    }
 }

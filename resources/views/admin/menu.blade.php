@@ -14,10 +14,10 @@
                 <p class="total">{{ $totalUsuarios}} usuário(s) cadastrado(s)</p>
             </div>
         </a>
-        <a href="">
+        <a href="{{ route('requisicoes') }}">
             <div class="opcao">
                 <p class="titulo">Requisições</p>
-                <p class="total">2 novas requisições</p>
+                <p class="total">{{ $totalRequisicoes }} nova(s) requisiçõe(s)</p>
             </div>
         </a>
         <a href="{{ route('produtos') }}">

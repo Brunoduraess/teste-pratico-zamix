@@ -1,34 +1,46 @@
 
 function Composicao() {
-    const tipo = document.getElementById('tipoProduto').value;
+    const tipoInput = document.getElementById('tipoProduto');
+
+    if (!tipoInput) {
+        console.warn('Elemento com id "tipoProduto" não encontrado.');
+        return;
+    }
+
+    const tipo = tipoInput.value;
     const composicao = document.getElementById('composicaoProdutos');
-    composicao.style.display = tipo === 'Composto' ? 'block' : 'none';
-}
 
-if (oldComposicaoEntrada) {
-    Composicao();
-
-    oldComposicaoEntrada.forEach((item, index) => {
-        adicionarProduto(item);
-    });
-}
-
-if (oldComposicao) {
-    document.getElementById('tipoProduto').value = 'Composto';
-    Composicao();
-
-    oldComposicao.forEach((item, index) => {
-        adicionarProduto(item);
-    });
-} else {
     if (composicao) {
-        Composicao();
-
-        composicao.forEach((item, index) => {
-            adicionarProduto(item);
-        });
-    };
+        composicao.style.display = tipo === 'Composto' ? 'block' : 'none';
+    }
 }
+
+if (typeof oldComposicaoEntrada !== 'undefined' && Array.isArray(oldComposicaoEntrada)) {
+    Composicao();
+
+    oldComposicaoEntrada.forEach((item) => {
+        adicionarProduto(item);
+    });
+}
+
+else if (typeof oldComposicao !== 'undefined' && Array.isArray(oldComposicao)) {
+    const tipoProduto = document.getElementById('tipoProduto');
+    if (tipoProduto) tipoProduto.value = 'Composto';
+    Composicao();
+
+    oldComposicao.forEach((item) => {
+        adicionarProduto(item);
+    });
+}
+
+else if (typeof composicao !== 'undefined' && Array.isArray(composicao)) {
+    Composicao();
+
+    composicao.forEach((item) => {
+        adicionarProduto(item);
+    });
+}
+
 
 function adicionarProduto(oldData = null) {
     const lista = document.getElementById('listaProdutos');

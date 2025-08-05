@@ -3,10 +3,13 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InputController;
+use App\Http\Controllers\OutputController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\checkLogin;
+use App\Models\Request;
 use Illuminate\Support\Facades\Route;
 
 //Rotas de autenticação
@@ -47,4 +50,14 @@ Route::middleware(checkLogin::class)->group(function () {
     Route::get('/entradas', [InputController::class, 'entradas'])->name('entradas');
     Route::get('/cadastrarEntrada', [InputController::class, 'cadastrarEntrada'])->name('cadastrarEntrada');
     Route::post('/enviaCadastroEntrada', [InputController::class, 'enviaCadastroEntrada'])->name('enviaCadastroEntrada');
+
+    //Rotas para requisições
+    Route::get('/requisicoes', [RequestController::class, 'requisicoes'])->name('requisicoes');
+    Route::get('/cadastrarRequsicao', [RequestController::class, 'cadastrarRequisicao'])->name('cadastrarRequisicao');
+    Route::post('/enviaCadastroRequisicao', [RequestController::class, 'enviaCadastroRequisicao'])->name('enviaCadastroRequisicao');
+    Route::get('/dadosRequisicao/{id}', [RequestController::class, 'dadosRequisicao'])->name('dadosRequisicao');
+    Route::get('/recusarRequisicao/{id}', [RequestController::class, 'recusarRequisicao'])->name('recusarRequisicao');
+    Route::post('/enviaRecusaRequisicao', [RequestController::class, 'enviaRecusaRequisicao'])->name('enviaRecusaRequisicao');
+    Route::get('/aprovarRequisicao/{id}', [RequestController::class, 'aprovarRequisicao'])->name('aprovarRequisicao');
+    Route::post('/enviaAprovacaoRequisicao', [RequestController::class, 'enviaAprovacaoRequisicao'])->name('enviaAprovacaoRequisicao');
 });
