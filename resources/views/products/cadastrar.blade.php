@@ -128,8 +128,6 @@
     <script>
         const produtosSimples = @json($produtosSimples);
         const oldComposicao = @json(old('composicao'));
-
-        console.log(oldComposicao);
     </script>
     <script src="{{ asset('assets/js/composicao.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.mask.js') }}"></script>
