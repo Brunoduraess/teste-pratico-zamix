@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
@@ -18,5 +19,15 @@ class Product extends Model
     public function composicoes(): HasMany
     {
         return $this->hasMany(Composition::class, 'id_produto_composto', 'id');
+    }
+
+    public function estoque(): HasOne
+    {
+        return $this->hasOne(Stock::class, 'id_produto', 'id');
+    }
+
+    public function entrada(): HasMany
+    {
+        return $this->hasMany(Input::class, 'id_produto', 'id');
     }
 }

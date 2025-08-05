@@ -5,6 +5,14 @@ function Composicao() {
     composicao.style.display = tipo === 'Composto' ? 'block' : 'none';
 }
 
+if (oldComposicaoEntrada) {
+    Composicao();
+
+    oldComposicaoEntrada.forEach((item, index) => {
+        adicionarProduto(item);
+    });
+}
+
 if (oldComposicao) {
     document.getElementById('tipoProduto').value = 'Composto';
     Composicao();
@@ -21,8 +29,6 @@ if (oldComposicao) {
         });
     };
 }
-
-
 
 function adicionarProduto(oldData = null) {
     const lista = document.getElementById('listaProdutos');

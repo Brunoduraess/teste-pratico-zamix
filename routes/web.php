@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InputController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\checkLogin;
 use Illuminate\Support\Facades\Route;
@@ -35,4 +37,14 @@ Route::middleware(checkLogin::class)->group(function () {
     Route::get('/dadosProduto/{id}', [ProductController::class, 'dadosProduto'])->name('dadosProduto');
     Route::get('/editarProduto/{id}', [ProductController::class, 'editarProduto'])->name('editarProduto');
     Route::post('/enviaEdicaoProduto', [ProductController::class, 'enviaEdicaoProduto'])->name('enviaEdicaoProduto');
+
+    //Rotas para o estoque
+    Route::get('/estoque', [StockController::class, 'estoque'])->name('estoque');
+    Route::get('/editarProdutoEstoque/{id}', [StockController::class, 'editarProdutoEstoque'])->name('editarProdutoEstoque');
+    Route::post('/enviaEdicaoProdutoEstoque', [StockController::class, 'enviaEdicaoProdutoEstoque'])->name('enviaEdicaoProdutoEstoque');
+
+    //Rotas para entrada
+    Route::get('/entradas', [InputController::class, 'entradas'])->name('entradas');
+    Route::get('/cadastrarEntrada', [InputController::class, 'cadastrarEntrada'])->name('cadastrarEntrada');
+    Route::post('/enviaCadastroEntrada', [InputController::class, 'enviaCadastroEntrada'])->name('enviaCadastroEntrada');
 });

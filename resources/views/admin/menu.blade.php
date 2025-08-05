@@ -26,10 +26,10 @@
                 <p class="total">{{ $totalProdutos }} produto(s) cadastrado(s)</p>
             </div>
         </a>
-                <a href="">
+                <a href="{{ route('estoque') }}">
             <div class="opcao">
                 <p class="titulo">Estoque de produtos</p>
-                <p class="total">20 usuários cadastrados</p>
+                <p class="total">{{ $totalEstoque }} produto(s) em estoque</p>
             </div>
         </a>
     </section>
