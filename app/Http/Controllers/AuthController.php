@@ -57,7 +57,11 @@ class AuthController extends Controller
             ]
         ]);
 
-        return redirect()->route('menu');
+        if (session('usuario.acesso') == "Administrador") {
+            return redirect()->route('menu');
+        } else {
+            return redirect()->route('requisicoes');
+        }
     }
 
     public function esqueci()
