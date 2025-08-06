@@ -7,8 +7,8 @@
 
 ### 1. Clonar o repositório
 ```bash
-git clone https://seu-repositorio.git
-cd nome-do-projeto
+git clone https://github.com/Brunoduraess/teste-pratico-zamix
+cd /teste-pratico-zamix
 ```
 
 ### 2. Instalar dependências
@@ -60,7 +60,11 @@ database/create/usuario.sql
 
 Ou executar o **seeder**:
 ```bash
-php artisan db:seed --class=UsuarioSeeder
+php artisan db:seed --class=UsersTableSeeder
+```
+
+```bash
+Por padrão, a senha para novos usuários é 1234.
 ```
 
 ---
