@@ -67,6 +67,7 @@ Route::middleware(checkLogin::class)->group(function () {
     });
 
     Route::get('/requisicoes', [RequestController::class, 'requisicoes'])->name('requisicoes');
+    Route::post('/filtrarRequsiicoes', [RequestController::class, 'filtrarRequisicoes'])->name('filtrarRequisicoes');
     Route::get('/cadastrarRequsicao', [RequestController::class, 'cadastrarRequisicao'])->name('cadastrarRequisicao');
     Route::post('/enviaCadastroRequisicao', [RequestController::class, 'enviaCadastroRequisicao'])->name('enviaCadastroRequisicao');
     Route::get('/dadosRequisicao/{id}', [RequestController::class, 'dadosRequisicao'])->name('dadosRequisicao');

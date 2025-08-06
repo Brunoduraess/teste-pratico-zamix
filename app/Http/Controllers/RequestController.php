@@ -40,6 +40,36 @@ class RequestController extends Controller
         return view('requests.menu', ['requisicoes' => $requisicoes]);
     }
 
+    public function filtrarRequisicoes(Request $request)
+    {
+
+        $de = date('Y-m-d 00:00:00', strtotime($request->input('de')));
+        $inputAte = $request->input('ate');
+        $ate = $inputAte ? date('Y-m-d 23:59:59', strtotime($inputAte)) : date('Y-m-d 23:59:59');
+
+        if (session('usuario.acesso') == "Administrador") {
+            $requisicoes = ModelsRequest::whereBetween('data', [$de, $ate])->with(['produtos', 'usuarios'])->get();
+        } else {
+            $idFuncionario = session('usuario.id');
+
+            $requisicoes = ModelsRequest::where('id_funcionario', $idFuncionario)->whereBetween('data', [$de, $ate])->with(['produtos', 'usuarios'])->get();
+        }
+
+        foreach ($requisicoes as $requisicao) {
+
+            $idRequisicao = $requisicao->id;
+
+            $totalProdutos = RequestProduct::where('id_requisicao', $idRequisicao)->count();
+
+            $requisicao->totalProdutos = $totalProdutos;
+            $requisicao->data = date('d/m/Y H:i', strtotime($requisicao->data));
+            $requisicao->requisitante = $requisicao->usuarios->nome;
+            $requisicao->departamento = $requisicao->usuarios->departamento;
+        }
+
+        return view('requests.menu', ['requisicoes' => $requisicoes]);
+    }
+
     public function cadastrarRequisicao()
     {
         $produtos = Product::all();
