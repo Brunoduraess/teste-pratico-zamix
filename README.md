@@ -7,8 +7,8 @@
 
 ### 1. Clonar o repositório
 ```bash
-git clone https://seu-repositorio.git
-cd nome-do-projeto
+git clone https://github.com/Brunoduraess/teste-pratico-zamix
+cd /teste-pratico-zamix
 ```
 
 ### 2. Instalar dependências
