@@ -60,8 +60,12 @@ database/create/usuario.sql
 
 Ou executar o **seeder**:
 ```bash
-php artisan db:seed --class=UsuarioSeeder
+php artisan db:seed --class=UsersTableSeeder
 ```
+
+```
+Por padrão, a senha para novos usuários 1234
+---
 
 ---
 
