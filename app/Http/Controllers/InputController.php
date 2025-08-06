@@ -24,6 +24,24 @@ class InputController extends Controller
         return view('inputs.menu', ['entradas' => $entradas]);
     }
 
+    public function filtrarEntradas(Request $request)
+    {
+
+        $de = date('Y-m-d 00:00:00', strtotime($request->input('de')));
+        $inputAte = $request->input('ate');
+        $ate = $inputAte ? date('Y-m-d 23:59:59', strtotime($inputAte)) : date('Y-m-d 23:59:59');
+
+        $entradas = Input::whereBetween('data', [$de, $ate])->with(['produtos', 'usuarios'])->get();
+
+        foreach ($entradas as $entrada) {
+            $entrada->produtos = $entrada->produtos->nome;
+            $entrada->responsavel = $entrada->usuarios->nome;
+            $entrada->data = date('d/m/Y H:i', strtotime($entrada->data));
+        }
+
+        return view('inputs.menu', ['entradas' => $entradas]);
+    }
+
     public function cadastrarEntrada()
     {
         $produtos = Product::where('tipo', 'Simples')->orderBy('nome')->get(['id', 'nome']);
@@ -76,8 +94,5 @@ class InputController extends Controller
         return redirect()->route('entradas')->with('alerta', 'Entrada cadastrada');
     }
 
-    public function dadosProdutoEstoque($id)
-    {
-        
-    }
+    public function dadosProdutoEstoque($id) {}
 }

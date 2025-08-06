@@ -22,6 +22,12 @@
         </div>
         <div class="ferramentas">
             <input type="text" name="pesquisar" id="pesquisar" placeholder="Pesquisar..." class="form-control">
+            <form action="{{ route('filtrarEntradas') }}" method="post">
+                @csrf
+                <input type="date" name="de" id="de" class="form-control" required>
+                <input type="date" name="ate" id="ate" class="form-control">
+                <button type="submit" class="btn btn-success">Filtrar</button>
+            </form>
             <a href="{{ route('cadastrarEntrada') }}" class="btn">+ Registrar nova entrada</a>
         </div>
 

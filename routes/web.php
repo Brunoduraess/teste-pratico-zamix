@@ -52,6 +52,7 @@ Route::middleware(checkLogin::class)->group(function () {
 
         //Rotas para entrada
         Route::get('/entradas', [InputController::class, 'entradas'])->name('entradas');
+        Route::post('/filtrarEntradas', [InputController::class, 'filtrarEntradas'])->name('filtrarEntradas');
         Route::get('/cadastrarEntrada', [InputController::class, 'cadastrarEntrada'])->name('cadastrarEntrada');
         Route::post('/enviaCadastroEntrada', [InputController::class, 'enviaCadastroEntrada'])->name('enviaCadastroEntrada');
 

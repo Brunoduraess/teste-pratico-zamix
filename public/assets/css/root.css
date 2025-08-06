@@ -243,7 +243,17 @@ body {
         & .btn {
             background-color: var(--laranja);
             color: var(--branco);
-            width: 20%;
+            width: 30%;
+        }
+
+        & form {
+            display: flex;
+            gap: 2%;
+            margin-right: 2%;
+
+            & .btn {
+                background-color: #198754;
+            }
         }
     }
 
