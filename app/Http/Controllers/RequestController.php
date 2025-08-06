@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Composition;
 use App\Models\Output;
 use App\Models\Product;
 use App\Models\Request as ModelsRequest;
@@ -15,7 +16,14 @@ class RequestController extends Controller
 {
     public function requisicoes()
     {
-        $requisicoes = ModelsRequest::with(['produtos', 'usuarios'])->get();
+
+        if (session('usuario.acesso') == "Administrador") {
+            $requisicoes = ModelsRequest::with(['produtos', 'usuarios'])->get();
+        } else {
+            $idFuncionario = session('usuario.id');
+
+            $requisicoes = ModelsRequest::where('id_funcionario', $idFuncionario)->with(['produtos', 'usuarios'])->get();
+        }
 
         foreach ($requisicoes as $requisicao) {
 
@@ -90,13 +98,13 @@ class RequestController extends Controller
             $produto->nome = $produto->produtos->nome;
             $idProduto = $produto->produtos->id;
 
-            if ($requisicao->status == 'Concluida'){
+            if ($requisicao->status == 'Concluida') {
                 $totalEnviado = Output::where(
                     [
                         'id_requisicao' => $idRequisicao,
                         'id_produto' => $idProduto
-                    
-                    ])->value('quantidade');
+                    ]
+                )->value('quantidade');
 
                 $produto->totalEnviado = $totalEnviado;
             }
@@ -105,8 +113,8 @@ class RequestController extends Controller
         $requisicao->data = date('d/m/Y H:i', strtotime($requisicao->data));
         $requisicao->requisitante = $requisicao->usuarios->nome;
         $requisicao->departamento = $requisicao->usuarios->departamento;
-        $requisicao->data_avaliacao = date('d/m/Y H:i', strtotime($requisicao->data_avaliacao));
-        $requisicao->avaliado_por = $requisicao->avaliador->nome;
+        $requisicao->data_avaliacao = isset($requisicao->data_avaliacao) ? date('d/m/Y H:i', strtotime($requisicao->data_avaliacao)) : null;
+        $requisicao->avaliado_por = $requisicao->avaliador->nome ?? null;
 
 
         return view('requests.dados', ['requisicao' => $requisicao, 'produtos' => $produtosRequisicao]);
@@ -173,9 +181,33 @@ class RequestController extends Controller
             $produto->nome = $produto->produtos->nome;
             $idProduto = $produto->produtos->id;
             $produto->idProduto = $idProduto;
+            $tipoProduto = $produto->produtos->tipo;
+            $produto->tipoProduto = $tipoProduto;
 
-            $totalEstoque = Stock::where('id_produto', $idProduto)->value('quantidade');
-            $produto->total_estoque = $totalEstoque;
+            if ($tipoProduto == "Simples") {
+                $totalEstoque = Stock::where('id_produto', $idProduto)->value('quantidade');
+                $produto->total_estoque = $totalEstoque;
+            } else {
+                $composicao = Composition::where('id_produto_composto', $idProduto)->get();
+
+                $possibilidades = [];
+
+                foreach ($composicao as $produtoComposicao) {
+                    $idProdutoSimples = $produtoComposicao->id_produto_simples;
+                    $quantidadePorKit = $produtoComposicao->quantidade;
+
+                    $quantidadeEstoque = Stock::where('id_produto', $idProdutoSimples)->value('quantidade');
+
+                    if ($quantidadeEstoque === null || $quantidadeEstoque < $quantidadePorKit) {
+                        $possibilidades[] = 0;
+                    } else {
+                        $kitsPossiveis = intdiv($quantidadeEstoque, $quantidadePorKit);
+                        $possibilidades[] = $kitsPossiveis;
+                    }
+                }
+
+                $produto->total_estoque = min($possibilidades);
+            }
         }
 
         $requisicao->data = date('d/m/Y H:i', strtotime($requisicao->data));
@@ -195,6 +227,7 @@ class RequestController extends Controller
 
         foreach ($produtos as $produto) {
             $idProduto = $produto["'id'"];
+            $tipoProduto = $produto["'tipo'"];
             $totalEnviado = $produto["'totalEnviado'"];
 
             $saida = new Output();
@@ -205,10 +238,25 @@ class RequestController extends Controller
             $saida->quantidade = $totalEnviado;
             $saida->save();
 
-            $produtoEstoque = Stock::where('id_produto', $idProduto)->first();
+            if ($tipoProduto == "Simples") {
+                $produtoEstoque = Stock::where('id_produto', $idProduto)->first();
 
-            $produtoEstoque->quantidade -= $totalEnviado;
-            $produtoEstoque->save();
+                $produtoEstoque->quantidade -= $totalEnviado;
+                $produtoEstoque->save();
+            } else {
+                $composicao = Composition::where('id_produto_composto', $idProduto)->get();
+
+                foreach ($composicao as $produtoComposicao) {
+                    $idProdutoSimples = $produtoComposicao->id_produto_simples;
+                    $quantidadeComposicao = $produtoComposicao->quantidade;
+
+                    $quantidadeBaixa = $quantidadeComposicao * $totalEnviado;
+
+                    $produtoEstoque = Stock::where('id_produto', $idProdutoSimples)->first();
+                    $produtoEstoque->quantidade -= $quantidadeBaixa;
+                    $produtoEstoque->save();
+                }
+            }
         }
 
         $requisicao = ModelsRequest::where('id', $idRequisicao)->first();
