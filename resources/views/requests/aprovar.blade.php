@@ -39,6 +39,7 @@
             <br>
             @for ($i = 0; $i < count($produtos); $i++)
                 <input type="hidden" name="produtos[{{ $i }}]['id']" value="{{ $produtos[$i]['idProduto'] }}">
+                <input type="hidden" name="produtos[{{ $i }}]['tipo']" value="{{ $produtos[$i]['tipoProduto'] }}">
                 <div class="form-group col-xl-4">
                     <label for="produto">Produto:</label>
                     <input type="text" name="produtos[{{ $i }}]['nome']"
