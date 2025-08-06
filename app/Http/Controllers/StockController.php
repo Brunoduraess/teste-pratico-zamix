@@ -20,6 +20,7 @@ class StockController extends Controller
                 ->value('data');
 
             $produto->nome = $produto->produtos->nome;
+            $produto->maximo = $produto->maximo ?? '-';
             $produto->ultimaEntrada = isset($ultimaEntrada) ? date('d/m/Y H:i', strtotime($ultimaEntrada)) : '-';
         }
 
