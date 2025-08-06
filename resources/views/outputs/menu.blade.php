@@ -22,7 +22,12 @@
         </div>
         <div class="ferramentas">
             <input type="text" name="pesquisar" id="pesquisar" placeholder="Pesquisar..." class="form-control">
-            <a href="" class="btn">Filtrar</a>
+            <form action="{{ route('filtrarSaidas') }}" method="post">
+                @csrf
+                <input type="date" name="de" id="de" class="form-control" required>
+                <input type="date" name="ate" id="ate" class="form-control">
+                <button type="submit" class="btn btn-success">Filtrar</button>
+            </form>
         </div>
         <div class="tabela">
             <table class="table table-data">

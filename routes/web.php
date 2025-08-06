@@ -64,6 +64,7 @@ Route::middleware(checkLogin::class)->group(function () {
 
         //Rotas para saidas
         Route::get('/saidas', [OutputController::class, 'saidas'])->name('saidas');
+        Route::post('/filtrarSaidas', [OutputController::class, 'filtrarSaidas'])->name('filtrarSaidas');
     });
 
     Route::get('/requisicoes', [RequestController::class, 'requisicoes'])->name('requisicoes');
