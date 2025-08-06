@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('observacao')->nullable();
 
             $table->foreign('id_funcionario')->references('id')->on('users');
+            $table->foreign('avaliado_por')->references('id')->on('users');
         });
     }
 
