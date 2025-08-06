@@ -26,7 +26,7 @@ class InputController extends Controller
 
     public function cadastrarEntrada()
     {
-        $produtos = Product::orderBy('nome')->get(['id', 'nome']);
+        $produtos = Product::where('tipo', 'Simples')->orderBy('nome')->get(['id', 'nome']);
 
         return view('inputs.cadastrar', ['produtos' => $produtos]);
     }
