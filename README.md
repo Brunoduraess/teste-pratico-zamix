@@ -63,9 +63,9 @@ Ou executar o **seeder**:
 php artisan db:seed --class=UsersTableSeeder
 ```
 
+```bash
+Por padrão, a senha para novos usuários é 1234.
 ```
-Por padrão, a senha para novos usuários 1234
----
 
 ---
 
